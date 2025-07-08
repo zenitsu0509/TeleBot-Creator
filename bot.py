@@ -21,7 +21,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user = update.effective_user
     # The 'await' keyword is used because the send_message function is asynchronous
     await update.message.reply_html(
-        f"Hi {user.mention_html()}! I am an echo bot. Send me any message, and I will repeat it back to you.",
+        f"Hi {user.mention_html()}! I am an echo bot. Send me any message, and I will repeat it back to you.","Send /help fro the help"
     )
 
 # Define the function that will echo messages
@@ -29,7 +29,13 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Echo the user message."""
     # This will simply send back the same text message the user sent.
     await update.message.reply_text(update.message.text)
-
+    
+async def help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Sends a message when the command /help is issued."""
+    await update.message.reply_text(
+        "This is a simple echo bot. Send me any message, and I will repeat it back to you."
+    )
+    
 def main() -> None:
     """Start the bot."""
     # Create the Application and pass it your bot's token.
@@ -38,6 +44,8 @@ def main() -> None:
     # on different commands - answer in Telegram
     # Register the /start command handler
     application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("help", help))
+    
 
     # on non-command i.e message - echo the message on Telegram
     # Register the message handler to echo all text messages
