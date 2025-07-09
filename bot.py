@@ -47,7 +47,7 @@ def main() -> None:
     application.add_handler(CommandHandler("help", help))
     
 
-    # on non-command i.e message - echo the message on Telegram
+   
     # Register the message handler to echo all text messages
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
