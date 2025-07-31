@@ -70,7 +70,6 @@ async def find_medicine(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     chat_id = update.effective_chat.id
     logger.info(f"Received query from chat_id {chat_id}: '{user_query}'")
 
-    # Let the user know the bot is working
     await context.bot.send_message(chat_id, f"🔍 Searching for '{user_query}'...")
 
     try:
