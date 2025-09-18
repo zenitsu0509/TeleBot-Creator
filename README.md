@@ -9,6 +9,58 @@ You will create a simple Telegram bot that:
 - Responds to a `/help` command with a helpful text.
 - Echoes back any text message it receives.
 
+---
+
+## New: Attendance Reminder Bot (Optional Second Bot)
+
+You can also run a separate bot that reminds you to mark attendance twice per day with at least a 1 hour gap. It will:
+
+- Send a reminder every 30 minutes (config hard‑coded) until the first attendance is marked.
+- After the first mark, wait at least 1 hour, then start reminding for the second attendance (every 30 minutes) until marked.
+- Stop for the rest of the day once both marks are complete.
+- Automatically reset each new day.
+- Skip Sundays (no reminders sent).
+
+### Commands
+
+- `/start` – Registers you and shows instructions + current status.
+- `/status` – Shows whether you've marked first / second attendance today.
+
+### How to Mark
+
+Each reminder message contains an inline button:
+
+- "Mark First Attendance ✅"
+- "Mark Second Attendance ✅"
+
+Tap the button to record the mark. The second mark enforces a 1 hour wait after the first.
+
+### Run the Attendance Bot
+
+This is a separate file so it doesn't interfere with the original echo bot.
+
+```bash
+python attendance_bot.py
+```
+
+Make sure your `.env` still contains:
+
+```
+TELEGRAM_BOT_TOKEN="YOUR_TELEGRAM_BOT_TOKEN"
+```
+
+### State Persistence
+
+Per-user daily status is stored in `attendance_state.json` in the same folder. It is recreated automatically if deleted. Data for each user resets automatically at the start of a new day.
+
+### Assumptions / Notes
+
+- Uses server local time. Adjust code if you need a fixed timezone.
+- Reminders start only after you run `/start` at least once (registers you in state).
+- No extra dependencies beyond those already in `requirements.txt` (relies on `python-telegram-bot` JobQueue).
+
+---
+
 ## Getting Started: A Step-by-Step Guide
 
 Follow these instructions to get your first bot running.
