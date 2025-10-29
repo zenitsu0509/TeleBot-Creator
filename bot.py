@@ -5,10 +5,8 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 from dotenv import load_dotenv
 import os
 
-# Load environment variables from .env file
 load_dotenv()
 
-# --- IMPORTANT: GET YOUR BOT TOKEN FROM THE .env FILE ---
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 if not BOT_TOKEN:
     raise ValueError("Please set the TELEGRAM_BOT_TOKEN environment variable in your .env file.")
@@ -63,6 +61,5 @@ def main() -> None:
     print("Bot is running... Press Ctrl-C to stop.")
     application.run_polling()
 
-# This part ensures that the main() function is called when the script is executed
 if __name__ == '__main__':
     main()
